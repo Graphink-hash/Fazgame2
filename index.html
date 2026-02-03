@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAZGAME | Faz Service, Faz Gaming</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><style>
+:root{
+  --bg:#000;
+  --card:rgba(255,255,255,.08);
+  --text:#fff;
+  --muted:#d1d1d1;
+  --accent:#ffd84d;
+  --accent-dark:#e6c43d;
+  --wa:#ffd84d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+
+header{position:sticky;top:0;z-index:1000;background:rgba(0,0,0,.95);backdrop-filter:blur(12px);padding:10px 16px}
+.header-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:18px;color:var(--accent)}
+.header-logos{display:flex;gap:14px}
+.header-logos img{width:22px;filter:invert(1);opacity:.85}
+
+.banner{position:relative;min-height:320px;overflow:hidden}
+.banner-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
+.banner-slide.active{opacity:1}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.45),rgba(0,0,0,.9))}
+.banner-content{position:relative;z-index:2;padding:72px 16px}
+.banner-card{max-width:560px;background:rgba(8,8,12,.9);border-radius:20px;padding:26px}
+.banner-card h1{font-size:32px;font-weight:800}
+.tagline{margin-top:6px;font-weight:600;color:var(--accent)}
+.banner-categories-text{margin-top:8px;font-size:13px;color:rgba(255,255,255,.85)}
+
+.sticky-cta{position:sticky;top:62px;z-index:900;background:rgba(0,0,0,.92);padding:12px 16px}
+.btn{display:block;max-width:360px;margin:auto;padding:14px;border-radius:14px;background:var(--wa);color:#000;font-weight:800;text-align:center;transition:.2s}
+.btn:hover{background:var(--accent-dark)}
+
+section{padding:40px 16px}
+.section-title{font-size:20px;font-weight:800}
+
+.hot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:768px){.hot-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1100px){.hot-grid{grid-template-columns:repeat(4,1fr)}}
+.hot-card{position:relative;height:180px;background:linear-gradient(180deg,rgba(255,216,77,.28),rgba(255,255,255,.06));border-radius:18px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;transition:.25s}
+.hot-card:hover{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(255,216,77,.35),0 8px 28px rgba(255,216,77,.35)}
+.hot-title{font-weight:800}
+.hot-desc{font-size:13px;color:var(--muted)}
+.fire-badge{position:absolute;top:12px;right:12px;font-size:11px;font-weight:800;padding:4px 8px;border-radius:999px;background:#ffb300;color:#000}
+
+.controls{margin-bottom:14px}
+.search-box{padding:14px;border-radius:14px;border:none;background:rgba(255,255,255,.08);color:#fff;width:100%;max-width:360px}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-btn{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:12px;cursor:pointer}
+.filter-btn.active{background:var(--accent);color:#000}
+.filter-count{margin-left:6px;background:#000;padding:2px 6px;border-radius:999px;font-size:10px}
+
+.product-grid{display:grid;gap:14px}
+@media(min-width:768px){.product-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+.product-card{background:var(--card);border-radius:16px;padding:12px;display:grid;grid-template-columns:72px 1fr;gap:12px;position:relative;cursor:pointer;transition:transform .2s ease, box-shadow .2s ease}
+.product-card:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,216,77,.25),0 8px 22px rgba(0,0,0,.45)}
+.product-actions{margin-top:8px}
+.check-btn{display:inline-block;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700;background:var(--accent);color:#000}
+.product-card:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,216,77,.25),0 8px 22px rgba(0,0,0,.45)}
+.product-icon{width:72px;height:72px;border-radius:12px;background:#111;display:flex;align-items:center;justify-content:center}
+.product-icon img{width:34px;filter:invert(1)}
+.product-price{font-weight:800;margin-top:6px}
+
+.type-badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:800;padding:3px 6px;border-radius:6px}
+.type-game{background:#3cff7f;color:#000}
+.type-console{background:#ffd84d;color:#000}
+.type-pc{background:#4dd2ff;color:#000}
+.type-accessory{background:#ff7a7a;color:#000}
+
+.condition-badge{position:absolute;top:10px;left:10px;font-size:9px;font-weight:600;padding:2px 6px;border-radius:999px;text-transform:uppercase}
+.condition-new{background:rgba(255,216,77,.45)}
+.condition-used{background:rgba(255,255,255,.12)}
+
+.service-list{margin-top:16px;display:grid;gap:10px}
+.social-icons{margin-top:16px;display:flex;justify-content:center;gap:20px}
+.social-icons a{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.social-icons img{width:22px;filter:invert(1)}
+footer{text-align:center;padding:24px;color:#aaa}
+.service-chip{background:rgba(255,255,255,.08);padding:6px 10px;border-radius:999px;cursor:pointer;transition:.2s}
+.service-chip:hover{background:rgba(255,216,77,.25)}
+.service-chip.primary{border:1px solid rgba(255,216,77,.6);color:#ffd84d}
+.banner-services,.banner-social{opacity:0;transform:translateY(8px);animation:fadeUp .6s ease forwards}
+.banner-social{animation-delay:.15s}
+.banner-social a:hover img{opacity:1;transform:scale(1.12);filter:invert(1) drop-shadow(0 0 6px rgba(255,216,77,.6))}{opacity:1;transform:scale(1.08)}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+</style></head>
+<body><header>
+  <div class="header-inner">
+    <div class="logo">FAZGAME</div>
+    <div class="header-logos">
+      <img src="https://api.iconify.design/simple-icons/playstation.svg">
+      <img src="https://api.iconify.design/simple-icons/xbox.svg">
+      <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg">
+      <img src="https://api.iconify.design/mdi/desktop-classic.svg">
+    </div>
+  </div>
+</header><div class="banner">
+  <div class="banner-slide active" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e')"></div>
+  <div class="banner-slide" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420')"></div>
+  <div class="banner-content">
+    <div class="banner-card">
+      <h1>FAZGAME</h1>
+      <p class="tagline"><strong>Faz</strong> Service, <strong>Faz</strong> Gaming</p>
+      <div class="banner-services" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:rgba(255,255,255,.85)">
+  <span class="service-chip primary" data-scroll="hot">Custom PC Build</span>
+  <span class="service-chip" data-scroll="hot">PC Parts & Upgrade</span>
+  <span class="service-chip" data-scroll="stock">Console & Games</span>
+  <span class="service-chip" data-scroll="stock">Repair & Setup</span>
+</div><div class="banner-social" style="margin-top:14px;display:flex;gap:14px">
+  <a href="https://www.tiktok.com/@syazeone?_r=1&_t=ZS-93ajAdKxDUL" target="_blank" rel="noopener" aria-label="TikTok" title="Follow us on TikTok" style="cursor:pointer"><img style="width:22px;filter:invert(1);opacity:.95" src="https://api.iconify.design/simple-icons/tiktok.svg"></a>
+  <a href="https://wa.me/60163671934" target="_blank" rel="noopener" aria-label="WhatsApp" title="Chat with us on WhatsApp" style="cursor:pointer"><img style="width:22px;filter:invert(1);opacity:.95" src="https://api.iconify.design/simple-icons/whatsapp.svg"></a>
+  <a href="https://www.instagram.com/fazgame_empire/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener" aria-label="Instagram" title="Follow us on Instagram" style="cursor:pointer"><img style="width:20px;filter:invert(1);opacity:.85" src="https://api.iconify.design/simple-icons/instagram.svg"></a>
+  <a href="https://www.facebook.com/share/1DHZdLi62G/" target="_blank" rel="noopener" aria-label="Facebook" title="Follow us on Facebook" style="cursor:pointer"><img style="width:20px;filter:invert(1);opacity:.85" src="https://api.iconify.design/simple-icons/facebook.svg"></a>
+  <a href="https://t.me/fazgameofficial" target="_blank" rel="noopener" aria-label="Telegram" title="Join our Telegram" style="cursor:pointer"><img style="width:20px;filter:invert(1);opacity:.85" src="https://api.iconify.design/simple-icons/telegram.svg"></a>
+</div>
+    </div>
+  </div>
+</div><div class="sticky-cta"><a href="https://wa.me/60163671934" target="_blank" rel="noopener" class="btn">Chat on WhatsApp</a></div><section id="hot">
+  <h2 class="section-title">Hot Items</h2>
+  <div class="hot-grid">
+    <div class="hot-card"><span class="fire-badge">HOT</span><div class="hot-title">PC Budget RM2,000</div><div class="hot-desc">Entry Gaming</div></div>
+    <div class="hot-card"><span class="fire-badge">HOT</span><div class="hot-title">PC Budget RM3,000</div><div class="hot-desc">Balanced Build</div></div>
+    <div class="hot-card"><span class="fire-badge">HOT</span><div class="hot-title">PC Budget RM4,000</div><div class="hot-desc">High Performance</div></div>
+    <div class="hot-card"><span class="fire-badge">HOT</span><div class="hot-title">Custom PC</div><div class="hot-desc">Free Setup</div></div>
+  </div>
+</section><section id="stock">
+  <h2 class="section-title">Stock Available</h2>
+  <div class="controls"><input id="search" class="search-box" placeholder="Search item"></div>
+  <div class="filter-tabs" id="filters"></div>
+  <div class="product-grid" id="grid"></div>
+</section><footer>© 2026 FAZGAME • Faz Service, Faz Gaming</footer><script>
+const slides=document.querySelectorAll('.banner-slide');let i=0;
+setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active')},4000);
+
+const products=[
+ {n:'PlayStation 5 Disc',c:'console',type:'console',p:2399,cond:'new'},
+ {n:'PlayStation 4 Slim',c:'ps4',type:'console',p:699,cond:'used'},
+ {n:'GTA V',c:'ps5',type:'game',p:129,cond:'used'},
+ {n:'Forza Horizon 5',c:'xbox',type:'game',p:189,cond:'new'},
+ {n:'Zelda TOTK',c:'switch',type:'game',p:259,cond:'new'},
+ {n:'RTX 3060',c:'pc',type:'pc',p:1299,cond:'used'},
+ {n:'PS5 Controller',c:'other',type:'accessory',p:299,cond:'new'}
+];
+
+const icons={
+ console:'https://api.iconify.design/mdi/console.svg',
+ ps5:'https://api.iconify.design/simple-icons/playstation.svg',
+ ps4:'https://api.iconify.design/simple-icons/playstation.svg',
+ xbox:'https://api.iconify.design/simple-icons/xbox.svg',
+ switch:'https://api.iconify.design/simple-icons/nintendoswitch.svg',
+ pc:'https://api.iconify.design/mdi/desktop-classic.svg',
+ other:'https://api.iconify.design/mdi/gamepad-variant.svg'
+};
+
+const categories=['all','console','ps5','ps4','xbox','switch','pc','other'];
+let active='all';
+const filters=document.getElementById('filters');
+const grid=document.getElementById('grid');
+const search=document.getElementById('search');
+
+categories.forEach(cat=>{
+ const b=document.createElement('button');
+ b.className='filter-btn'+(cat==='all'?' active':'');
+ b.dataset.filter=cat;
+ b.innerHTML=`${cat.toUpperCase()} <span class="filter-count" id="count-${cat}"></span>`;
+ b.onclick=()=>{active=cat;document.querySelectorAll('.filter-btn').forEach(x=>x.classList.toggle('active',x.dataset.filter===cat));update();
+
+document.querySelectorAll('.service-chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    const target=document.getElementById(chip.dataset.scroll);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});};
+ filters.appendChild(b);
+});
+
+function update(){
+ const q=search.value.toLowerCase();
+ const list=products.filter(p=>(active==='all'||p.c===active)&&p.n.toLowerCase().includes(q));
+ grid.innerHTML='';
+ list.forEach(p=>{
+  grid.insertAdjacentHTML('beforeend',`
+  <div class="product-card" onclick="openWhatsApp('${p.n}',${p.p},'${p.cond}')">
+    <span class="condition-badge condition-${p.cond}">${p.cond}</span>
+    <span class="type-badge type-${p.type}">${p.type.toUpperCase()}</span>
+    <div class="product-icon"><img src="${icons[p.c]}"></div>
+    <div>${p.n}<div class="product-price">RM${p.p}</div><div class="product-actions"><span class="check-btn" onclick="event.stopPropagation();checkAvailability('${p.n}',${p.p},'${p.cond}')">Check availability</span></div></div>
+  </div>`);
+ });
+ categories.forEach(c=>document.getElementById(`count-${c}`).textContent=c==='all'?products.length:products.filter(p=>p.c===c).length);
+}
+search.addEventListener('input',update);
+update();
+
+function checkAvailability(name,price,cond){
+  const msg = encodeURIComponent(`Hi FAZGAME, I’d like to check availability for ${name} (RM${price}, ${cond.toUpperCase()}).`);
+  window.open(`https://wa.me/60163671934?text=${msg}`,'_blank');
+}
+
+</script></body>
+</html>
